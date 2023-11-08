@@ -14,7 +14,7 @@ func _ready():
 	direction = direction.rotated(deg_to_rad(rotation_degrees))
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	global_position += direction * SPEED * delta
 
 

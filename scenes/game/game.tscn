@@ -1,8 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://coq76sne47nay"]
+[gd_scene load_steps=3 format=3 uid="uid://coq76sne47nay"]
 
 [ext_resource type="PackedScene" uid="uid://b2ko6a4wlwknu" path="res://scenes/player/player.tscn" id="1_sfm1p"]
+[ext_resource type="PackedScene" uid="uid://drai3xgy64wgc" path="res://scenes/shark/shark.tscn" id="2_4sgxn"]
 
 [node name="Game" type="Node"]
 
 [node name="Player" parent="." instance=ExtResource("1_sfm1p")]
 position = Vector2(125, 75)
+
+[node name="Shark" parent="." instance=ExtResource("2_4sgxn")]
+position = Vector2(12, 88)

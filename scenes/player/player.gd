@@ -50,3 +50,7 @@ func shoot_bullet() -> void:
 
 func _on_reload_timer_timeout() -> void:
 	can_shoot = true
+
+
+func _on_area_entered(_area: Area2D) -> void:
+	queue_free()
