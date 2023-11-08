@@ -1,12 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://coq76sne47nay"]
 
 [ext_resource type="PackedScene" uid="uid://b2ko6a4wlwknu" path="res://scenes/player/player.tscn" id="1_sfm1p"]
-[ext_resource type="PackedScene" uid="uid://drai3xgy64wgc" path="res://scenes/shark/shark.tscn" id="2_4sgxn"]
+[ext_resource type="PackedScene" uid="uid://c3gn6t17ucxon" path="res://scenes/enem_spawner/enemy_spawner.tscn" id="3_f5cap"]
 
 [node name="Game" type="Node"]
 
+[node name="EnemySpawner" parent="." instance=ExtResource("3_f5cap")]
+
 [node name="Player" parent="." instance=ExtResource("1_sfm1p")]
 position = Vector2(125, 75)
-
-[node name="Shark" parent="." instance=ExtResource("2_4sgxn")]
-position = Vector2(12, 88)
