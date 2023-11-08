@@ -40,7 +40,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dea45"]
-size = Vector2(13, 7.5)
+size = Vector2(13, 7)
 
 [node name="Player" type="Area2D"]
 collision_mask = 2
@@ -52,6 +52,7 @@ autoplay = "default"
 offset = Vector2(-1, -2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_dea45")
 
 [node name="ReloadTimer" type="Timer" parent="."]
