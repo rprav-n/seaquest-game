@@ -47,6 +47,10 @@ collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_f5p8n")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(8.9407e-08, 2.38419e-07)
+scale = Vector2(0.9, 0.4)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qyboh")
 autoplay = "default"
@@ -55,3 +59,4 @@ autoplay = "default"
 shape = SubResource("RectangleShape2D_axdw2")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

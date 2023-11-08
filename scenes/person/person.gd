@@ -20,5 +20,10 @@ func flip_direction() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is Player:
-		pass # collect player + increment person counter
+		Global.saved_person_count += 1
+		GameEvent.person_collected.emit()
+	queue_free()
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()

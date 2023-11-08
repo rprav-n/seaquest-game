@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://hm3io4dh8rq"]
+
+[ext_resource type="PackedScene" uid="uid://dckxadg7yyg2i" path="res://scenes/ui/person_ui/person_ui.tscn" id="1_njwn0"]
+
+[node name="PersonCount" type="Node2D"]
+
+[node name="PersonUI" parent="." instance=ExtResource("1_njwn0")]
+order_number = 1
+
+[node name="PersonUI2" parent="." instance=ExtResource("1_njwn0")]
+position = Vector2(12, 0)
+order_number = 2
+
+[node name="PersonUI3" parent="." instance=ExtResource("1_njwn0")]
+position = Vector2(24, 0)
+order_number = 3
+
+[node name="PersonUI4" parent="." instance=ExtResource("1_njwn0")]
+position = Vector2(36, 0)
+order_number = 4
+
+[node name="PersonUI5" parent="." instance=ExtResource("1_njwn0")]
+position = Vector2(48, 0)
+order_number = 5
+
+[node name="PersonUI6" parent="." instance=ExtResource("1_njwn0")]
+position = Vector2(60, 0)
+order_number = 6
+
+[node name="PersonUI7" parent="." instance=ExtResource("1_njwn0")]
+position = Vector2(72, 0)
+order_number = 7

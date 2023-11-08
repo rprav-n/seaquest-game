@@ -9,6 +9,8 @@ var person_scene: PackedScene = preload("res://scenes/person/person.tscn")
 
 @onready var left_spawner: Node = $LeftSpawner
 @onready var right_spawner: Node = $RightSpawner
+@onready var persons: Node2D = get_tree().get_first_node_in_group("persons") as Node2D
+@onready var sharks: Node2D = get_tree().get_first_node_in_group("sharks") as Node2D
 
 var used_spawn_points: Array[int] = []
 
@@ -44,7 +46,7 @@ func spawn_sharks() -> void:
 
 func create_shark(shark_position: Vector2, should_flip: bool) -> void:
 	var shark: Shark = shark_scene.instantiate() as Shark
-	get_parent().add_child(shark)
+	sharks.add_child(shark)
 	
 	if should_flip:
 		shark.flip_direction()
@@ -64,7 +66,7 @@ func spawn_person() -> void:
 
 func create_person(person_position: Vector2, should_flip: bool) -> void:
 	var person: Person = person_scene.instantiate() as Person
-	get_tree().current_scene.add_child(person)
+	persons.add_child(person)
 	
 	person.global_position = person_position
 	if should_flip:

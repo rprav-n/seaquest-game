@@ -11,7 +11,7 @@ var can_shoot: bool = true
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var reload_timer: Timer = $ReloadTimer
 @onready var bullet_scene: PackedScene = preload("res://scenes/bullet/bullet.tscn")
-
+@onready var bullets: Node2D = get_tree().get_first_node_in_group("bullets") as Node2D
 
 func _physics_process(delta: float) -> void:
 	handle_movement()
@@ -34,7 +34,7 @@ func change_direction() -> void:
 func shoot_bullet() -> void:
 	if Input.is_action_pressed("shoot") && can_shoot:
 		var bullet: Bullet = bullet_scene.instantiate() as Bullet
-		get_tree().current_scene.add_child(bullet)
+		bullets.add_child(bullet)
 		
 		var offset: Vector2 = Vector2(BULLET_OFFSET, 0)
 		
