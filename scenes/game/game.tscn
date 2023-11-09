@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://coq76sne47nay"]
+[gd_scene load_steps=6 format=3 uid="uid://coq76sne47nay"]
 
 [ext_resource type="PackedScene" uid="uid://b2ko6a4wlwknu" path="res://scenes/player/player.tscn" id="1_sfm1p"]
 [ext_resource type="PackedScene" uid="uid://hm3io4dh8rq" path="res://scenes/ui/person_count/person_count.tscn" id="2_0ifn0"]
 [ext_resource type="PackedScene" uid="uid://c3gn6t17ucxon" path="res://scenes/spawner/spawner.tscn" id="2_sbctf"]
 [ext_resource type="PackedScene" uid="uid://dlsbs6bxnphr4" path="res://scenes/ui/oxygen_bar/oxygen_bar.tscn" id="2_vvxd2"]
+[ext_resource type="PackedScene" uid="uid://cdc28bkkcpsih" path="res://scenes/oxygen_area/oxygen_area.tscn" id="3_yp5wv"]
 
 [node name="Game" type="Node"]
 
@@ -14,13 +15,18 @@ position = Vector2(8, 8)
 
 [node name="OxygenBar" parent="UI" instance=ExtResource("2_vvxd2")]
 
+[node name="OxygenArea" parent="." instance=ExtResource("3_yp5wv")]
+
 [node name="Spawner" parent="." instance=ExtResource("2_sbctf")]
 
 [node name="Sharks" type="Node2D" parent="." groups=["sharks"]]
 
 [node name="Persons" type="Node2D" parent="." groups=["persons"]]
 
+[node name="Player" parent="." instance=ExtResource("1_sfm1p")]
+position = Vector2(160, 90)
+
 [node name="Bullets" type="Node2D" parent="." groups=["bullets"]]
 
-[node name="Player" parent="." instance=ExtResource("1_sfm1p")]
-position = Vector2(125, 75)
+[connection signal="full_crew_oxygen_refuel" from="OxygenArea" to="Player" method="_on_oxygen_area_full_crew_oxygen_refuel"]
+[connection signal="less_crew_oxygen_refuel" from="OxygenArea" to="Player" method="_on_oxygen_area_less_crew_oxygen_refuel"]
