@@ -4,14 +4,17 @@ extends Area2D
 
 const SPEED: Vector2 = Vector2(100, 80)
 const BULLET_OFFSET: int = 5
+const OXYGEN_DECREASE_SPEED: float = 2.5 
 
 var velocity: Vector2 = Vector2.ZERO
 var can_shoot: bool = true
+
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var reload_timer: Timer = $ReloadTimer
 @onready var bullet_scene: PackedScene = preload("res://scenes/bullet/bullet.tscn")
 @onready var bullets: Node2D = get_tree().get_first_node_in_group("bullets") as Node2D
+
 
 func _physics_process(delta: float) -> void:
 	handle_movement()
@@ -19,6 +22,7 @@ func _physics_process(delta: float) -> void:
 	shoot_bullet()
 	global_position += velocity * SPEED * delta
 	
+	Global.oxygen_level -= OXYGEN_DECREASE_SPEED * delta
 
 func handle_movement() -> void:
 	velocity.x = Input.get_axis("move_left", "move_right")

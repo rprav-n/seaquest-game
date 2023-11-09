@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://coq76sne47nay"]
+[gd_scene load_steps=5 format=3 uid="uid://coq76sne47nay"]
 
 [ext_resource type="PackedScene" uid="uid://b2ko6a4wlwknu" path="res://scenes/player/player.tscn" id="1_sfm1p"]
 [ext_resource type="PackedScene" uid="uid://hm3io4dh8rq" path="res://scenes/ui/person_count/person_count.tscn" id="2_0ifn0"]
 [ext_resource type="PackedScene" uid="uid://c3gn6t17ucxon" path="res://scenes/spawner/spawner.tscn" id="2_sbctf"]
+[ext_resource type="PackedScene" uid="uid://dlsbs6bxnphr4" path="res://scenes/ui/oxygen_bar/oxygen_bar.tscn" id="2_vvxd2"]
 
 [node name="Game" type="Node"]
 
@@ -10,6 +11,8 @@
 
 [node name="PersonCount" parent="UI" instance=ExtResource("2_0ifn0")]
 position = Vector2(8, 8)
+
+[node name="OxygenBar" parent="UI" instance=ExtResource("2_vvxd2")]
 
 [node name="Spawner" parent="." instance=ExtResource("2_sbctf")]
 
