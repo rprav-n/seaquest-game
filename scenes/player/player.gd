@@ -6,11 +6,15 @@ enum State {DEFAULT, FULL_REFUEL, LESS_REFUEL}
 
 const SPEED: Vector2 = Vector2(100, 80)
 const BULLET_OFFSET: int = 5
+
 const OXYGEN_DECREASE_SPEED: float = 2.5
 const OXYGEN_INCREASE_SPEED: float = 20.0
+const OXYGEN_REFUEL_Y_POS: float = 32.0
 
 var velocity: Vector2 = Vector2.ZERO
 var can_shoot: bool = true
+
+var screen_size: Vector2 = Vector2.ZERO
 
 var state: State = State.DEFAULT
 
@@ -21,6 +25,10 @@ var state: State = State.DEFAULT
 @onready var bullets: Node2D = get_tree().get_first_node_in_group("bullets") as Node2D
 
 
+func _ready() -> void:
+	screen_size = get_viewport_rect().size
+
+
 func _process(_delta: float) -> void:
 	if state == State.DEFAULT:
 		handle_movement()
@@ -28,8 +36,10 @@ func _process(_delta: float) -> void:
 		shoot_bullet()
 		lose_oxygen()
 	elif state == State.LESS_REFUEL:
+		move_to_shore_line()
 		refuel_oxygen()
 	elif state == State.FULL_REFUEL:
+		move_to_shore_line()
 		refuel_oxygen()
 
 
@@ -40,6 +50,11 @@ func _physics_process(_delta: float) -> void:
 
 func movement():
 	global_position += velocity * SPEED * get_physics_process_delta_time()
+
+
+func clamp_position() -> void:
+	global_position.x = clamp(global_position.x, 0.0, screen_size.x)
+	global_position.y = clamp(global_position.y, OXYGEN_REFUEL_Y_POS, screen_size.y)
 
 
 func handle_movement() -> void:
@@ -80,6 +95,10 @@ func refuel_oxygen() -> void:
 	Global.oxygen_level += OXYGEN_INCREASE_SPEED * get_process_delta_time()
 	if Global.oxygen_level >= 100.0:
 		state = State.DEFAULT
+
+
+func move_to_shore_line() -> void:
+	global_position.y = move_toward(global_position.y, OXYGEN_REFUEL_Y_POS, SPEED.y * get_physics_process_delta_time())
 
 
 func _on_reload_timer_timeout() -> void:

@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://coq76sne47nay"]
+[gd_scene load_steps=13 format=3 uid="uid://coq76sne47nay"]
 
 [ext_resource type="PackedScene" uid="uid://b2ko6a4wlwknu" path="res://scenes/player/player.tscn" id="1_sfm1p"]
+[ext_resource type="Script" path="res://scenes/game/game.gd" id="1_uqybb"]
 [ext_resource type="PackedScene" uid="uid://hm3io4dh8rq" path="res://scenes/ui/person_count/person_count.tscn" id="2_0ifn0"]
 [ext_resource type="PackedScene" uid="uid://c3gn6t17ucxon" path="res://scenes/spawner/spawner.tscn" id="2_sbctf"]
 [ext_resource type="PackedScene" uid="uid://dlsbs6bxnphr4" path="res://scenes/ui/oxygen_bar/oxygen_bar.tscn" id="2_vvxd2"]
@@ -33,6 +34,8 @@ subdivide_width = 8
 subdivide_depth = 1
 
 [node name="Game" type="Node"]
+script = ExtResource("1_uqybb")
+background_color = Color(0.145098, 0.133333, 0.266667, 1)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -43,6 +46,9 @@ position = Vector2(8, 8)
 
 [node name="Spawner" parent="." instance=ExtResource("2_sbctf")]
 
+[node name="Player" parent="." instance=ExtResource("1_sfm1p")]
+position = Vector2(160, 90)
+
 [node name="Environments" type="Node2D" parent="."]
 
 [node name="Water" parent="Environments" instance=ExtResource("5_kh3vb")]
@@ -51,33 +57,34 @@ mesh = SubResource("QuadMesh_oohpm")
 
 [node name="Water2" parent="Environments" instance=ExtResource("5_kh3vb")]
 modulate = Color(0.0470588, 0.901961, 0.94902, 1)
+z_index = -2
 position = Vector2(159, 50)
 mesh = SubResource("QuadMesh_714dk")
 
 [node name="Water3" parent="Environments" instance=ExtResource("5_kh3vb")]
 modulate = Color(0, 0.596078, 0.858824, 1)
+z_index = -3
 position = Vector2(159, 65)
 mesh = SubResource("QuadMesh_1o75w")
 
 [node name="Water4" parent="Environments" instance=ExtResource("5_kh3vb")]
 modulate = Color(0.117647, 0.341176, 0.611765, 1)
+z_index = -4
 position = Vector2(159, 110)
 mesh = SubResource("QuadMesh_ofof6")
 
 [node name="Water5" parent="Environments" instance=ExtResource("5_kh3vb")]
 modulate = Color(0.12549, 0.207843, 0.384314, 1)
+z_index = -5
 position = Vector2(160, 178)
 mesh = SubResource("QuadMesh_wwmqj")
 
 [node name="OxygenArea" parent="." instance=ExtResource("3_yp5wv")]
-position = Vector2(0, -16)
+position = Vector2(0, -5)
 
 [node name="Sharks" type="Node2D" parent="." groups=["sharks"]]
 
 [node name="Persons" type="Node2D" parent="." groups=["persons"]]
-
-[node name="Player" parent="." instance=ExtResource("1_sfm1p")]
-position = Vector2(160, 90)
 
 [node name="Bullets" type="Node2D" parent="." groups=["bullets"]]
 

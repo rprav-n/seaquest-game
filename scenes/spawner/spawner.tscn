@@ -5,33 +5,35 @@
 [node name="Spawner" type="Node2D"]
 script = ExtResource("1_r6vv1")
 
-[node name="LeftSpawner" type="Node" parent="."]
+[node name="LeftSpawner" type="Node2D" parent="."]
+position = Vector2(0, 64)
 
 [node name="1" type="Marker2D" parent="LeftSpawner"]
-position = Vector2(-46, 34)
+position = Vector2(-40, 32)
 
 [node name="2" type="Marker2D" parent="LeftSpawner"]
-position = Vector2(-46, 74)
+position = Vector2(-40, 72)
 
 [node name="3" type="Marker2D" parent="LeftSpawner"]
-position = Vector2(-46, 122)
+position = Vector2(-40, 112)
 
 [node name="4" type="Marker2D" parent="LeftSpawner"]
-position = Vector2(-46, 162)
+position = Vector2(-40, 152)
 
-[node name="RightSpawner" type="Node" parent="."]
+[node name="RightSpawner" type="Node2D" parent="."]
+position = Vector2(0, 64)
 
 [node name="1" type="Marker2D" parent="RightSpawner"]
-position = Vector2(354, 34)
+position = Vector2(360, 32)
 
 [node name="2" type="Marker2D" parent="RightSpawner"]
-position = Vector2(354, 74)
+position = Vector2(360, 72)
 
 [node name="3" type="Marker2D" parent="RightSpawner"]
-position = Vector2(354, 122)
+position = Vector2(360, 112)
 
 [node name="4" type="Marker2D" parent="RightSpawner"]
-position = Vector2(354, 162)
+position = Vector2(360, 152)
 
 [node name="SpawnSharkTimer" type="Timer" parent="."]
 wait_time = 6.0

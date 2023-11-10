@@ -7,8 +7,8 @@ const TOTAL_SPAWN_COUNT: int = 4
 var shark_scene: PackedScene = preload("res://scenes/shark/shark.tscn")
 var person_scene: PackedScene = preload("res://scenes/person/person.tscn")
 
-@onready var left_spawner: Node = $LeftSpawner
-@onready var right_spawner: Node = $RightSpawner
+@onready var left_spawner: Node2D = $LeftSpawner
+@onready var right_spawner: Node2D = $RightSpawner
 @onready var persons: Node2D = get_tree().get_first_node_in_group("persons") as Node2D
 @onready var sharks: Node2D = get_tree().get_first_node_in_group("sharks") as Node2D
 
