@@ -1,10 +1,36 @@
-[gd_scene load_steps=6 format=3 uid="uid://coq76sne47nay"]
+[gd_scene load_steps=12 format=3 uid="uid://coq76sne47nay"]
 
 [ext_resource type="PackedScene" uid="uid://b2ko6a4wlwknu" path="res://scenes/player/player.tscn" id="1_sfm1p"]
 [ext_resource type="PackedScene" uid="uid://hm3io4dh8rq" path="res://scenes/ui/person_count/person_count.tscn" id="2_0ifn0"]
 [ext_resource type="PackedScene" uid="uid://c3gn6t17ucxon" path="res://scenes/spawner/spawner.tscn" id="2_sbctf"]
 [ext_resource type="PackedScene" uid="uid://dlsbs6bxnphr4" path="res://scenes/ui/oxygen_bar/oxygen_bar.tscn" id="2_vvxd2"]
 [ext_resource type="PackedScene" uid="uid://cdc28bkkcpsih" path="res://scenes/oxygen_area/oxygen_area.tscn" id="3_yp5wv"]
+[ext_resource type="PackedScene" uid="uid://b0473fo4khrvk" path="res://scenes/environments/water/water.tscn" id="5_kh3vb"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_oohpm"]
+size = Vector2(500, 4)
+subdivide_width = 8
+subdivide_depth = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_714dk"]
+size = Vector2(500, 35)
+subdivide_width = 8
+subdivide_depth = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_1o75w"]
+size = Vector2(500, 40)
+subdivide_width = 8
+subdivide_depth = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_ofof6"]
+size = Vector2(500, 75)
+subdivide_width = 8
+subdivide_depth = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_wwmqj"]
+size = Vector2(500, 75)
+subdivide_width = 8
+subdivide_depth = 1
 
 [node name="Game" type="Node"]
 
@@ -15,9 +41,36 @@ position = Vector2(8, 8)
 
 [node name="OxygenBar" parent="UI" instance=ExtResource("2_vvxd2")]
 
-[node name="OxygenArea" parent="." instance=ExtResource("3_yp5wv")]
-
 [node name="Spawner" parent="." instance=ExtResource("2_sbctf")]
+
+[node name="Environments" type="Node2D" parent="."]
+
+[node name="Water" parent="Environments" instance=ExtResource("5_kh3vb")]
+position = Vector2(160, 35)
+mesh = SubResource("QuadMesh_oohpm")
+
+[node name="Water2" parent="Environments" instance=ExtResource("5_kh3vb")]
+modulate = Color(0.0470588, 0.901961, 0.94902, 1)
+position = Vector2(159, 50)
+mesh = SubResource("QuadMesh_714dk")
+
+[node name="Water3" parent="Environments" instance=ExtResource("5_kh3vb")]
+modulate = Color(0, 0.596078, 0.858824, 1)
+position = Vector2(159, 65)
+mesh = SubResource("QuadMesh_1o75w")
+
+[node name="Water4" parent="Environments" instance=ExtResource("5_kh3vb")]
+modulate = Color(0.117647, 0.341176, 0.611765, 1)
+position = Vector2(159, 110)
+mesh = SubResource("QuadMesh_ofof6")
+
+[node name="Water5" parent="Environments" instance=ExtResource("5_kh3vb")]
+modulate = Color(0.12549, 0.207843, 0.384314, 1)
+position = Vector2(160, 178)
+mesh = SubResource("QuadMesh_wwmqj")
+
+[node name="OxygenArea" parent="." instance=ExtResource("3_yp5wv")]
+position = Vector2(0, -16)
 
 [node name="Sharks" type="Node2D" parent="." groups=["sharks"]]
 
