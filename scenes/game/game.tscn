@@ -1,13 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://coq76sne47nay"]
+[gd_scene load_steps=15 format=3 uid="uid://coq76sne47nay"]
 
 [ext_resource type="PackedScene" uid="uid://b2ko6a4wlwknu" path="res://scenes/player/player.tscn" id="1_sfm1p"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_uqybb"]
-[ext_resource type="PackedScene" uid="uid://hm3io4dh8rq" path="res://scenes/ui/person_count/person_count.tscn" id="2_0ifn0"]
+[ext_resource type="PackedScene" uid="uid://q6uvhtebyw13" path="res://scenes/ui/ui_screen/ui_screen.tscn" id="2_bsjco"]
 [ext_resource type="PackedScene" uid="uid://c3gn6t17ucxon" path="res://scenes/spawner/spawner.tscn" id="2_sbctf"]
-[ext_resource type="PackedScene" uid="uid://dlsbs6bxnphr4" path="res://scenes/ui/oxygen_bar/oxygen_bar.tscn" id="2_vvxd2"]
+[ext_resource type="PackedScene" uid="uid://dqud3y2bh3pjo" path="res://scenes/ui/game_over/game_over_screen.tscn" id="3_2a23i"]
 [ext_resource type="PackedScene" uid="uid://cdc28bkkcpsih" path="res://scenes/oxygen_area/oxygen_area.tscn" id="3_yp5wv"]
+[ext_resource type="PackedScene" uid="uid://c2bt4ev05s2ta" path="res://scenes/game_camera/game_camera.tscn" id="4_lyo74"]
 [ext_resource type="PackedScene" uid="uid://b0473fo4khrvk" path="res://scenes/environments/water/water.tscn" id="5_kh3vb"]
-[ext_resource type="PackedScene" uid="uid://d0lv71swcgmj3" path="res://scenes/person/person.tscn" id="8_yjxuf"]
+[ext_resource type="PackedScene" uid="uid://bux3aio27i7gg" path="res://scenes/hazard/hazard.tscn" id="7_rc8td"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_oohpm"]
 size = Vector2(500, 4)
@@ -30,7 +31,7 @@ subdivide_width = 8
 subdivide_depth = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_wwmqj"]
-size = Vector2(500, 75)
+size = Vector2(500, 175)
 subdivide_width = 8
 subdivide_depth = 1
 
@@ -38,14 +39,18 @@ subdivide_depth = 1
 script = ExtResource("1_uqybb")
 background_color = Color(0.145098, 0.133333, 0.266667, 1)
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UIScreen" parent="." instance=ExtResource("2_bsjco")]
 
-[node name="PersonCount" parent="UI" instance=ExtResource("2_0ifn0")]
-position = Vector2(8, 8)
+[node name="GameOverScreen" parent="UIScreen" instance=ExtResource("3_2a23i")]
+unique_name_in_owner = true
+visible = false
 
-[node name="OxygenBar" parent="UI" instance=ExtResource("2_vvxd2")]
+[node name="GameCamera" parent="." instance=ExtResource("4_lyo74")]
+position = Vector2(160, 90)
+metadata/_edit_lock_ = true
 
 [node name="Spawner" parent="." instance=ExtResource("2_sbctf")]
+metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_sfm1p")]
 position = Vector2(160, 90)
@@ -79,29 +84,27 @@ mesh = SubResource("QuadMesh_ofof6")
 [node name="Water5" parent="Environments" instance=ExtResource("5_kh3vb")]
 modulate = Color(0.12549, 0.207843, 0.384314, 1)
 z_index = -5
-position = Vector2(160, 178)
+position = Vector2(160, 200)
 mesh = SubResource("QuadMesh_wwmqj")
+
+[node name="Hazard" parent="Environments" instance=ExtResource("7_rc8td")]
+position = Vector2(-80, 160)
+
+[node name="Hazard2" parent="Environments" instance=ExtResource("7_rc8td")]
+position = Vector2(400, 160)
 
 [node name="OxygenArea" parent="." instance=ExtResource("3_yp5wv")]
 position = Vector2(0, -5)
+metadata/_edit_lock_ = true
 
 [node name="Sharks" type="Node2D" parent="." groups=["sharks"]]
+metadata/_edit_lock_ = true
 
 [node name="Persons" type="Node2D" parent="." groups=["persons"]]
-
-[node name="Person" parent="Persons" instance=ExtResource("8_yjxuf")]
-position = Vector2(28, 87)
-
-[node name="Person2" parent="Persons" instance=ExtResource("8_yjxuf")]
-position = Vector2(50, 87)
-
-[node name="Person3" parent="Persons" instance=ExtResource("8_yjxuf")]
-position = Vector2(75, 87)
-
-[node name="Person4" parent="Persons" instance=ExtResource("8_yjxuf")]
-position = Vector2(99, 88)
+metadata/_edit_lock_ = true
 
 [node name="Bullets" type="Node2D" parent="." groups=["bullets"]]
+metadata/_edit_lock_ = true
 
 [connection signal="full_crew_oxygen_refuel" from="OxygenArea" to="Player" method="_on_oxygen_area_full_crew_oxygen_refuel"]
 [connection signal="less_crew_oxygen_refuel" from="OxygenArea" to="Player" method="_on_oxygen_area_less_crew_oxygen_refuel"]

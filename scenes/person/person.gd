@@ -3,6 +3,7 @@ class_name Person
 extends Area2D
 
 const SPEED: int = 40
+const POINT: int = 50
 
 var direction: Vector2 = Vector2.RIGHT
 
@@ -18,12 +19,14 @@ func flip_direction() -> void:
 	animated_sprite_2d.flip_h = true
 
 
+func update_score() -> void:
+	Global.score += POINT;
+	GameEvent.update_score.emit()
+
+
 func _on_area_entered(area: Area2D) -> void:
 	if area is Player:
 		Global.saved_person_count += 1
 		GameEvent.person_collected.emit()
-	queue_free()
-
-
-func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+		update_score()
 	queue_free()

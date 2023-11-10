@@ -66,6 +66,7 @@ shoot={
 2d_physics/layer_2="Shark"
 2d_physics/layer_3="Bullet"
 2d_physics/layer_4="Person"
+2d_physics/layer_5="Hazard"
 
 [rendering]
 

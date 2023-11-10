@@ -11,6 +11,8 @@ const OXYGEN_DECREASE_SPEED: float = 2.5
 const OXYGEN_INCREASE_SPEED: float = 20.0
 const OXYGEN_REFUEL_Y_POS: float = 32.0
 
+const MAX_Y_POS_OFFSET: float = 100.0
+
 var velocity: Vector2 = Vector2.ZERO
 var can_shoot: bool = true
 
@@ -42,10 +44,13 @@ func _process(_delta: float) -> void:
 	elif state == State.FULL_REFUEL:
 		move_to_shore_line()
 
+	death_when_oxygen_reaches_zero()
 
 func _physics_process(_delta: float) -> void:
 	if state == State.DEFAULT:
 		movement()
+	
+	GameEvent.camera_follow_player.emit(global_position)
 
 
 func movement():
@@ -55,7 +60,7 @@ func movement():
 
 func clamp_position() -> void:
 	global_position.x = clamp(global_position.x, 0.0, screen_size.x)
-	global_position.y = clamp(global_position.y, OXYGEN_REFUEL_Y_POS, screen_size.y)
+	global_position.y = clamp(global_position.y, OXYGEN_REFUEL_Y_POS, screen_size.y + MAX_Y_POS_OFFSET)
 
 
 func handle_movement() -> void:
@@ -108,13 +113,31 @@ func remove_one_person() -> void:
 	GameEvent.person_collected.emit()
 
 
+func die() -> void:
+	queue_free()
+	GameEvent.game_over.emit()
+
+
+func player_gets_eaten_by_shark() -> void:
+	die()
+
+
+func death_when_oxygen_reaches_zero() -> void:
+	if Global.oxygen_level <= 0.0:
+		die()
+
+
+func death_when_refueling_while_full() -> void:
+	if Global.oxygen_level >= 80:
+		die()
+
+
 func _on_reload_timer_timeout() -> void:
 	can_shoot = true
 
 
 func _on_area_entered(_area: Area2D) -> void:
-	pass
-	#queue_free()
+	player_gets_eaten_by_shark()
 
 
 func _on_oxygen_area_full_crew_oxygen_refuel() -> void:
@@ -123,6 +146,7 @@ func _on_oxygen_area_full_crew_oxygen_refuel() -> void:
 
 
 func _on_oxygen_area_less_crew_oxygen_refuel() -> void:
+	death_when_refueling_while_full()
 	state = State.OXYGEN_REFUEL
 	remove_one_person()
 

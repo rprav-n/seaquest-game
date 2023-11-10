@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://q6uvhtebyw13"]
+
+[ext_resource type="Script" path="res://scenes/ui/ui_screen/ui_screen.gd" id="1_770dw"]
+[ext_resource type="PackedScene" uid="uid://hm3io4dh8rq" path="res://scenes/ui/person_count/person_count.tscn" id="1_j8635"]
+[ext_resource type="FontFile" uid="uid://dsf24o3t5b6nl" path="res://assets/user_interface/fonts/font_2.ttf" id="2_1ks20"]
+[ext_resource type="PackedScene" uid="uid://dlsbs6bxnphr4" path="res://scenes/ui/oxygen_bar/oxygen_bar.tscn" id="2_5ad0f"]
+
+[node name="UIScreen" type="CanvasLayer"]
+script = ExtResource("1_770dw")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="PersonCount" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_j8635")]
+position = Vector2(8, 8)
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_1ks20")
+theme_override_font_sizes/font_size = 10
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OxygenBar" parent="MarginContainer" instance=ExtResource("2_5ad0f")]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
