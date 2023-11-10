@@ -6,4 +6,5 @@
 [node name="PersonUI" type="Sprite2D"]
 texture = ExtResource("1_lerbf")
 hframes = 2
+frame = 1
 script = ExtResource("2_evmc5")

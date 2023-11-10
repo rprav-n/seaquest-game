@@ -100,6 +100,7 @@ func lose_oxygen() -> void:
 func refuel_oxygen() -> void:
 	Global.oxygen_level += OXYGEN_INCREASE_SPEED * get_process_delta_time()
 	if Global.oxygen_level >= 100.0:
+		animated_sprite_2d.play("default")
 		state = State.DEFAULT
 
 
@@ -143,12 +144,14 @@ func _on_area_entered(_area: Area2D) -> void:
 func _on_oxygen_area_full_crew_oxygen_refuel() -> void:
 	unload_person_timer.start()
 	state = State.FULL_REFUEL
+	animated_sprite_2d.play("flash")
 
 
 func _on_oxygen_area_less_crew_oxygen_refuel() -> void:
 	death_when_refueling_while_full()
 	state = State.OXYGEN_REFUEL
 	remove_one_person()
+	animated_sprite_2d.play("flash")
 
 
 func _on_unload_person_timer_timeout() -> void:
