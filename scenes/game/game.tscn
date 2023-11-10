@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://coq76sne47nay"]
+[gd_scene load_steps=14 format=3 uid="uid://coq76sne47nay"]
 
 [ext_resource type="PackedScene" uid="uid://b2ko6a4wlwknu" path="res://scenes/player/player.tscn" id="1_sfm1p"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_uqybb"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dlsbs6bxnphr4" path="res://scenes/ui/oxygen_bar/oxygen_bar.tscn" id="2_vvxd2"]
 [ext_resource type="PackedScene" uid="uid://cdc28bkkcpsih" path="res://scenes/oxygen_area/oxygen_area.tscn" id="3_yp5wv"]
 [ext_resource type="PackedScene" uid="uid://b0473fo4khrvk" path="res://scenes/environments/water/water.tscn" id="5_kh3vb"]
+[ext_resource type="PackedScene" uid="uid://d0lv71swcgmj3" path="res://scenes/person/person.tscn" id="8_yjxuf"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_oohpm"]
 size = Vector2(500, 4)
@@ -50,6 +51,8 @@ position = Vector2(8, 8)
 position = Vector2(160, 90)
 
 [node name="Environments" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Water" parent="Environments" instance=ExtResource("5_kh3vb")]
 position = Vector2(160, 35)
@@ -85,6 +88,18 @@ position = Vector2(0, -5)
 [node name="Sharks" type="Node2D" parent="." groups=["sharks"]]
 
 [node name="Persons" type="Node2D" parent="." groups=["persons"]]
+
+[node name="Person" parent="Persons" instance=ExtResource("8_yjxuf")]
+position = Vector2(28, 87)
+
+[node name="Person2" parent="Persons" instance=ExtResource("8_yjxuf")]
+position = Vector2(50, 87)
+
+[node name="Person3" parent="Persons" instance=ExtResource("8_yjxuf")]
+position = Vector2(75, 87)
+
+[node name="Person4" parent="Persons" instance=ExtResource("8_yjxuf")]
+position = Vector2(99, 88)
 
 [node name="Bullets" type="Node2D" parent="." groups=["bullets"]]
 

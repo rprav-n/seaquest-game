@@ -2,7 +2,7 @@ class_name Player
 
 extends Area2D
 
-enum State {DEFAULT, FULL_REFUEL, LESS_REFUEL}
+enum State {DEFAULT, FULL_REFUEL, OXYGEN_REFUEL}
 
 const SPEED: Vector2 = Vector2(100, 80)
 const BULLET_OFFSET: int = 5
@@ -23,6 +23,7 @@ var state: State = State.DEFAULT
 @onready var reload_timer: Timer = $ReloadTimer
 @onready var bullet_scene: PackedScene = preload("res://scenes/bullet/bullet.tscn")
 @onready var bullets: Node2D = get_tree().get_first_node_in_group("bullets") as Node2D
+@onready var unload_person_timer: Timer = $UnloadPersonTimer
 
 
 func _ready() -> void:
@@ -35,12 +36,11 @@ func _process(_delta: float) -> void:
 		change_direction()
 		shoot_bullet()
 		lose_oxygen()
-	elif state == State.LESS_REFUEL:
+	elif state == State.OXYGEN_REFUEL:
 		move_to_shore_line()
 		refuel_oxygen()
 	elif state == State.FULL_REFUEL:
 		move_to_shore_line()
-		refuel_oxygen()
 
 
 func _physics_process(_delta: float) -> void:
@@ -50,6 +50,7 @@ func _physics_process(_delta: float) -> void:
 
 func movement():
 	global_position += velocity * SPEED * get_physics_process_delta_time()
+	clamp_position()
 
 
 func clamp_position() -> void:
@@ -101,17 +102,33 @@ func move_to_shore_line() -> void:
 	global_position.y = move_toward(global_position.y, OXYGEN_REFUEL_Y_POS, SPEED.y * get_physics_process_delta_time())
 
 
+func remove_one_person() -> void:
+	if Global.saved_person_count > 0:
+		Global.saved_person_count -= 1 
+	GameEvent.person_collected.emit()
+
+
 func _on_reload_timer_timeout() -> void:
 	can_shoot = true
 
 
 func _on_area_entered(_area: Area2D) -> void:
-	queue_free()
+	pass
+	#queue_free()
 
 
-func _on_oxygen_area_full_crew_oxygen_refuel():
+func _on_oxygen_area_full_crew_oxygen_refuel() -> void:
+	unload_person_timer.start()
 	state = State.FULL_REFUEL
 
 
-func _on_oxygen_area_less_crew_oxygen_refuel():
-	state = State.LESS_REFUEL
+func _on_oxygen_area_less_crew_oxygen_refuel() -> void:
+	state = State.OXYGEN_REFUEL
+	remove_one_person()
+
+
+func _on_unload_person_timer_timeout() -> void:
+	remove_one_person()
+	if Global.saved_person_count <= 0:
+		state = State.OXYGEN_REFUEL
+		unload_person_timer.stop()

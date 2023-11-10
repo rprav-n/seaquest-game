@@ -15,4 +15,6 @@ func _ready() -> void:
 func _on_person_collected() -> void:
 	if Global.saved_person_count >= order_number:
 		texture = FULL_TEXTURE
+	else:
+		texture = EMPTY_TEXTURE
 
