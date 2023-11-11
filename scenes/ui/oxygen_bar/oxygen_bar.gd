@@ -3,6 +3,7 @@ class_name OxygenBar
 extends Node2D
 
 const WEIGHT: int = 6
+const OXYGEN_ALERT: AudioStream = preload("res://assets/user_interface/oxygen-bar/oxygen_alert.ogg")
 
 var previous_amount: int = 0
 
@@ -46,6 +47,7 @@ func alert(scale_value: float, rotation_value: int) -> void:
 	rotation_degrees = randf_range(-rotation_value, rotation_value)
 	modulate = Color(50, 50, 50)
 	flash_timer.start()
+	SoundManager.play_sound(OXYGEN_ALERT)
 
 
 func _on_flash_timer_timeout() -> void:

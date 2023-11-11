@@ -2,6 +2,8 @@ class_name GameOverScreen
 
 extends Control
 
+const GAME_OVER_SOUND: AudioStream = preload("res://assets/player/game_over.ogg")
+
 @onready var score_label: Label = %ScoreLabel
 @onready var high_score_label: Label = %HighScoreLabel
 @onready var game_over_delay: Timer = $GameOverDelay
@@ -30,3 +32,4 @@ func _on_retry_button_pressed() -> void:
 
 func _on_game_over_delay_timeout():
 	visible = true
+	SoundManager.play_sound(GAME_OVER_SOUND)

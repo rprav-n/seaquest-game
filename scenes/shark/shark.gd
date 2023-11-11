@@ -7,6 +7,7 @@ const SPEED: int = 50
 const MOVEMENT_FREQUENCY: float = 0.15
 const MOVEMENT_AMPLITUED: float = 0.5
 const POINT: int = 25
+const DEATH_SOUND: AudioStream = preload("res://assets/enemies/shark/shark_death.ogg")
 
 var direction: Vector2 = Vector2.RIGHT
 
@@ -30,6 +31,7 @@ func update_score() -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
+	SoundManager.play_sound(DEATH_SOUND)
 	update_score()
 	area.queue_free()
 	queue_free()

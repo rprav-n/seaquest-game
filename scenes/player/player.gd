@@ -27,7 +27,9 @@ const bullet_scene: PackedScene = preload("res://scenes/bullet/bullet.tscn")
 @onready var bullets: Node2D = get_tree().get_first_node_in_group("bullets") as Node2D
 @onready var unload_person_timer: Timer = $UnloadPersonTimer
 
-const shoot_sound: AudioStream = preload("res://assets/player/player_bullet/player_shoot.ogg")
+const SHOOT_SOUND: AudioStream = preload("res://assets/player/player_bullet/player_shoot.ogg")
+const DEATH_SOUND: AudioStream = preload("res://assets/player/player_death.ogg")
+const OXYGEN_FULL_SOUND: AudioStream = preload("res://assets/user_interface/oxygen-bar/full_oxygen_alert.ogg")
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
@@ -78,7 +80,7 @@ func change_direction() -> void:
 
 func shoot_bullet() -> void:
 	if Input.is_action_pressed("shoot") && can_shoot:
-		SoundManager.play_sound(shoot_sound)
+		SoundManager.play_sound(SHOOT_SOUND)
 		var bullet: Bullet = bullet_scene.instantiate() as Bullet
 		bullets.add_child(bullet)
 		
@@ -102,6 +104,7 @@ func lose_oxygen() -> void:
 func refuel_oxygen() -> void:
 	Global.oxygen_level += OXYGEN_INCREASE_SPEED * get_process_delta_time()
 	if Global.oxygen_level >= 100.0:
+		SoundManager.play_sound(OXYGEN_FULL_SOUND)
 		animated_sprite_2d.play("default")
 		state = State.DEFAULT
 
@@ -117,6 +120,7 @@ func remove_one_person() -> void:
 
 
 func die() -> void:
+	SoundManager.play_sound(DEATH_SOUND)
 	queue_free()
 	GameEvent.game_over.emit()
 
