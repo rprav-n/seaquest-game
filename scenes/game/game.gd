@@ -21,9 +21,3 @@ func reset_globals() -> void:
 	Global.score = 0
 
 
-
-func _on_screenshot_timer_timeout() -> void:
-	var img = get_viewport().get_texture().get_image()
-	var timestamp: int = int(Time.get_unix_time_from_system())
-
-	img.save_png("res://build/screenshots/screenshot_" + str(timestamp) + ".png")
