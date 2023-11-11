@@ -7,6 +7,7 @@ const GAME_OVER_SOUND: AudioStream = preload("res://assets/player/game_over.ogg"
 @onready var score_label: Label = %ScoreLabel
 @onready var high_score_label: Label = %HighScoreLabel
 @onready var game_over_delay: Timer = $GameOverDelay
+@onready var retry_button: Button = %RetryButton
 
 
 func _ready() -> void:
@@ -30,6 +31,11 @@ func _on_retry_button_pressed() -> void:
 	get_tree().reload_current_scene()
 
 
-func _on_game_over_delay_timeout():
+func _on_game_over_delay_timeout() -> void:
 	visible = true
+	retry_button.grab_focus()
 	SoundManager.play_sound(GAME_OVER_SOUND)
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()
