@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://coq76sne47nay"]
+[gd_scene load_steps=17 format=3 uid="uid://coq76sne47nay"]
 
 [ext_resource type="PackedScene" uid="uid://b2ko6a4wlwknu" path="res://scenes/player/player.tscn" id="1_sfm1p"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_uqybb"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b0473fo4khrvk" path="res://scenes/environments/water/water.tscn" id="5_kh3vb"]
 [ext_resource type="PackedScene" uid="uid://bux3aio27i7gg" path="res://scenes/hazard/hazard.tscn" id="7_rc8td"]
 [ext_resource type="PackedScene" uid="uid://d0lv71swcgmj3" path="res://scenes/person/person.tscn" id="8_yjxuf"]
+[ext_resource type="Texture2D" uid="uid://bj161x88s474o" path="res://assets/environment/sand_bottom.png" id="9_djo3g"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_oohpm"]
 size = Vector2(500, 4)
@@ -93,6 +94,12 @@ position = Vector2(-80, 160)
 
 [node name="Hazard2" parent="Environments" instance=ExtResource("7_rc8td")]
 position = Vector2(400, 160)
+
+[node name="Ground" type="Sprite2D" parent="Environments"]
+z_index = 1
+position = Vector2(160, 290)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("9_djo3g")
 
 [node name="OxygenArea" parent="." instance=ExtResource("3_yp5wv")]
 position = Vector2(0, -5)
