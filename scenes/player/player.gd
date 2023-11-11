@@ -7,7 +7,7 @@ enum State {DEFAULT, FULL_REFUEL, OXYGEN_REFUEL}
 const SPEED: Vector2 = Vector2(100, 80)
 const BULLET_OFFSET: int = 5
 
-const OXYGEN_DECREASE_SPEED: float = 2.5
+const OXYGEN_DECREASE_SPEED: float = 25.0
 const OXYGEN_INCREASE_SPEED: float = 20.0
 const OXYGEN_REFUEL_Y_POS: float = 32.0
 
