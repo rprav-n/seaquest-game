@@ -114,5 +114,9 @@ metadata/_edit_lock_ = true
 [node name="Bullets" type="Node2D" parent="." groups=["bullets"]]
 metadata/_edit_lock_ = true
 
+[node name="ScreenshotTimer" type="Timer" parent="."]
+wait_time = 10.0
+
 [connection signal="full_crew_oxygen_refuel" from="OxygenArea" to="Player" method="_on_oxygen_area_full_crew_oxygen_refuel"]
 [connection signal="less_crew_oxygen_refuel" from="OxygenArea" to="Player" method="_on_oxygen_area_less_crew_oxygen_refuel"]
+[connection signal="timeout" from="ScreenshotTimer" to="." method="_on_screenshot_timer_timeout"]
