@@ -7,7 +7,7 @@ enum State {DEFAULT, FULL_REFUEL, OXYGEN_REFUEL}
 const SPEED: Vector2 = Vector2(100, 80)
 const BULLET_OFFSET: int = 5
 
-const OXYGEN_DECREASE_SPEED: float = 25.0
+const OXYGEN_DECREASE_SPEED: float = 2.5
 const OXYGEN_INCREASE_SPEED: float = 20.0
 const OXYGEN_REFUEL_Y_POS: float = 32.0
 
@@ -23,10 +23,11 @@ var state: State = State.DEFAULT
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var reload_timer: Timer = $ReloadTimer
-@onready var bullet_scene: PackedScene = preload("res://scenes/bullet/bullet.tscn")
+const bullet_scene: PackedScene = preload("res://scenes/bullet/bullet.tscn")
 @onready var bullets: Node2D = get_tree().get_first_node_in_group("bullets") as Node2D
 @onready var unload_person_timer: Timer = $UnloadPersonTimer
 
+const shoot_sound: AudioStream = preload("res://assets/player/player_bullet/player_shoot.ogg")
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
@@ -77,6 +78,7 @@ func change_direction() -> void:
 
 func shoot_bullet() -> void:
 	if Input.is_action_pressed("shoot") && can_shoot:
+		SoundManager.play_sound(shoot_sound)
 		var bullet: Bullet = bullet_scene.instantiate() as Bullet
 		bullets.add_child(bullet)
 		
